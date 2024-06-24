@@ -3,8 +3,8 @@
 _Test First Programming_ ist ein alter Hut und kann heutzutage (_«excuse me, wir
 haben 2024!?»_) als gängige technische Praktik angesehen werden. Eher umstritten
 (garde bei Arbeitgebern und Ausbildungsanstalten) ist hingegen das sogenannte
-_Drink First Programming_, wobei man das Schreiben von Code mit einem
-alkoholischen Getränk begleitet.
+_Drink First Programming_, wobei das Schreiben von Code von der Einnahme eines
+alkoholischen Getränk begleitet wird.
 
 Wie auch das _Test First Programming_ oft dahingehend falsch verstanden wird,
 dass man zuerst _alle_ Tests schreiben und sich erst dann mit dem Produktivcode
