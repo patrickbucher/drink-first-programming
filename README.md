@@ -2,7 +2,7 @@
 
 _Test First Programming_ ist ein alter Hut und kann heutzutage (_«excuse me, wir
 haben 2024!?»_) als gängige technische Praktik angesehen werden. Eher umstritten
-(garde bei Arbeitgebern und Ausbildungsanstalten) ist hingegen das sogenannte
+(gerade bei Arbeitgebern und Ausbildungsanstalten) ist hingegen das sogenannte
 _Drink First Programming_, wobei das Schreiben von Code von der Einnahme eines
 alkoholischen Getränk begleitet wird.
 
