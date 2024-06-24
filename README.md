@@ -50,4 +50,5 @@ weder von der technischen Praktik des _Drink First Programming_ abgeraten noch
 soll diesem das Vorgehen anempfohlen werden. Stattdessen soll jeder anhand des
 Dargebotenen selber entscheiden, ob der begleitende Konsum alkoholischer
 Getränke den Programmierfähigkeiten und dem Gemütszustand förderlich oder
-abträglich ist ‒ und welche Zielgrösse wie stark gewichtet werden soll.
+abträglich ist ‒ und welche Zielgrösse (Kompetenz, Heiterkeit) wie stark
+gewichtet werden soll.
