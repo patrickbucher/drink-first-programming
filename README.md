@@ -10,8 +10,8 @@ Wie auch das _Test First Programming_ oft dahingehend falsch verstanden wird,
 dass man zuerst _alle_ Tests schreiben und sich erst dann mit dem Produktivcode
 befassen solle, könnte dieses Missverständnis auch die Haltung zum _Drink First
 Programming_ von negativen Vorurteilen überschatten: Es soll nicht zuerst
-ausgedehnt getrunken und erst dann im betrunkenen Zustand programmiert werden,
-sondern zuerst ein Schluck genommen und dann ein Stück Code geschrieben werden.
+ausgedehnt getrunken und erst dann im betrunkenen Zustand programmiert, sondern
+zuerst ein Schluck genommen und dann ein Stück Code geschrieben werden.
 
 Dieses Repository soll ein wissenschaftliches Experiment zur umstrittenen
 technischen Praktik des _Drink First Programmings_ dokumentieren, wobei die
@@ -50,4 +50,4 @@ weder von der technischen Praktik des _Drink First Programming_ abgeraten noch
 soll diesem das Vorgehen anempfohlen werden. Stattdessen soll jeder anhand des
 Dargebotenen selber entscheiden, ob der begleitende Konsum alkoholischer
 Getränke den Programmierfähigkeiten und dem Gemütszustand förderlich oder
-abträglich sind ‒ und welche Zielgrösse wie stark gewichtet werden soll.
+abträglich ist ‒ und welche Zielgrösse wie stark gewichtet werden soll.
