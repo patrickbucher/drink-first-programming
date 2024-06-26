@@ -1,3 +1,6 @@
+use connect_four::Board;
+
 fn main() {
-    println!("Hello, Connect Four!");
+    let board = Board::new();
+    println!("{}", board.render());
 }

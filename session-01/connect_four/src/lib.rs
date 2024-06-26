@@ -2,13 +2,15 @@ const WIDTH: usize = 7;
 const HEIGHT: usize = 6;
 
 const EMPTY: char = '_';
+const PLAYER_ONE: char = 'x';
+const PLAYER_TWO: char = 'o';
 
-struct Board {
+pub struct Board {
     fields: Vec<Vec<char>>,
 }
 
 impl Board {
-    fn new() -> Board {
+    pub fn new() -> Board {
         let mut fields = Vec::new();
         for r in 0..HEIGHT {
             let mut row = Vec::new();
@@ -18,6 +20,21 @@ impl Board {
             fields.push(row);
         }
         Board { fields }
+    }
+
+    pub fn render(&self) -> String {
+        let mut output = String::new();
+        for i in 1..=WIDTH {
+            output.push_str(&format!("{i} "));
+        }
+        output.push('\n');
+        for row in &self.fields {
+            for col in row {
+                output.push_str(&format!("{col} "));
+            }
+            output.push('\n');
+        }
+        output
     }
 }
 
