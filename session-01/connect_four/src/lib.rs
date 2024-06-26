@@ -60,6 +60,12 @@ impl Board {
                     let mut row = &mut self.fields[r];
                     if row[slot_index] == EMPTY {
                         row[slot_index] = stone;
+                        if self.is_horizontal_win(r, stone)
+                            || self.is_vertical_win(slot_index, stone)
+                            || self.is_diagonal_win(slot_index, r, stone)
+                        {
+                            return Ok(Outcome::Win(stone));
+                        }
                         return Ok(Outcome::Nothing {
                             row: r,
                             col: slot_index,
@@ -106,10 +112,10 @@ impl Board {
 
     fn is_diagonal_win(&self, r: usize, c: usize, p: char) -> bool {
         if self.fields[r][c] != p {
-            return false
+            return false;
         }
         let mut matches = 1;
-        
+
         // falling top/left
         let (mut i, mut j) = (r, c);
         while i >= 0 && j >= 0 {
@@ -139,7 +145,7 @@ impl Board {
         }
 
         let mut matches = 1;
-        
+
         // rising top/right
         let (mut i, mut j) = (r, c);
         while i >= 0 && j < WIDTH {
