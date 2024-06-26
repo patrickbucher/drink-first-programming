@@ -52,3 +52,7 @@ Dargebotenen selber entscheiden, ob der begleitende Konsum alkoholischer
 Getränke den Programmierfähigkeiten und dem Gemütszustand förderlich oder
 abträglich ist ‒ und welche Zielgrösse (Kompetenz, Heiterkeit) wie stark
 gewichtet werden soll.
+
+## Sessions
+
+- [Session 01](session-01/): [YouTube](https://www.youtube.com/playlist?list=PLux6j39XOCC7T_3h1MI86CkOc1qqrzxGR)

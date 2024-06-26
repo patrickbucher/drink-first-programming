@@ -1,6 +1,6 @@
 - Startzeit: 19:25
 - Getränke:
-    - 3 * Luzerner Bier Légère
+    - 6 * Luzerner Bier Légère (1.98 Liter à 2.9%)
 - Ereignisse und Erlebnisse:
     - ~20:00 Uhr: Erleuchtung wegen "rückläufigen Ranges": Der Compiler kann dies nicht prüfen! (Loop wurde nicht betreten)
         - man soll die Methode `rev()` von `Range` verwenden
