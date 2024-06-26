@@ -18,7 +18,7 @@ pub struct Board {
 }
 
 impl Board {
-    pub fn new() -> Board {
+    pub fn new() -> Self {
         let mut fields = Vec::new();
         for r in 0..HEIGHT {
             let mut row = Vec::new();
@@ -27,6 +27,10 @@ impl Board {
             }
             fields.push(row);
         }
+        Board { fields }
+    }
+
+    pub fn from(fields: Vec<Vec<char>>) -> Self {
         Board { fields }
     }
 
@@ -99,6 +103,69 @@ impl Board {
         }
         matches == CONNECT_N
     }
+
+    fn is_diagonal_win(&self, r: usize, c: usize, p: char) -> bool {
+        if self.fields[r][c] != p {
+            return false
+        }
+        let mut matches = 1;
+        
+        // falling top/left
+        let (mut i, mut j) = (r, c);
+        while i >= 0 && j >= 0 {
+            i -= 1;
+            j -= 1;
+            if self.fields[i][j] == p {
+                matches += 1;
+            } else {
+                break;
+            }
+        }
+
+        // falling bottom/right
+        let (mut i, mut j) = (r, c);
+        while i < HEIGHT && j < WIDTH {
+            i += 1;
+            j += 1;
+            if self.fields[i][j] == p {
+                matches += 1;
+            } else {
+                break;
+            }
+        }
+
+        if matches >= CONNECT_N {
+            return true;
+        }
+
+        let mut matches = 1;
+        
+        // rising top/right
+        let (mut i, mut j) = (r, c);
+        while i >= 0 && j < WIDTH {
+            i -= 1;
+            j += 1;
+            if self.fields[i][j] == p {
+                matches += 1;
+            } else {
+                break;
+            }
+        }
+
+        // rising bottom/left
+        let (mut i, mut j) = (r, c);
+        while i < HEIGHT && j >= 0 {
+            i += 1;
+            j -= 1;
+            if self.fields[i][j] == p {
+                matches += 1;
+            } else {
+                break;
+            }
+        }
+
+        return matches >= CONNECT_N;
+    }
 }
 
 #[cfg(test)]
@@ -157,6 +224,43 @@ mod tests {
         board.drop_stone(PLAYER_TWO, 3);
         board.drop_stone(PLAYER_TWO, 3);
         let actual = board.is_vertical_win(2, PLAYER_TWO);
+        assert_eq!(actual, true);
+    }
+
+    #[test]
+    fn test_diagonal_not_win() {
+        let board = Board::new();
+        let actual = board.is_diagonal_win(3, 4, PLAYER_ONE);
+        assert_eq!(actual, false);
+    }
+
+    #[test]
+    fn test_diagonal_win_falling() {
+        let fields = vec![
+            vec!['_', 'x', '_', '_', '_', '_', '_'],
+            vec!['_', '_', 'o', '_', '_', '_', '_'],
+            vec!['_', '_', '_', 'o', '_', '_', '_'],
+            vec!['_', '_', '_', '_', 'o', '_', '_'],
+            vec!['_', '_', '_', '_', '_', 'o', '_'],
+            vec!['_', '_', '_', '_', '_', '_', 'x'],
+        ];
+        let board = Board::from(fields);
+        let actual = board.is_diagonal_win(2, 3, PLAYER_TWO);
+        assert_eq!(actual, true);
+    }
+
+    #[test]
+    fn test_diagonal_win_rising() {
+        let fields = vec![
+            vec!['_', '_', '_', '_', '_', 'o', '_'],
+            vec!['_', '_', '_', '_', 'x', '_', '_'],
+            vec!['_', '_', '_', 'x', '_', '_', '_'],
+            vec!['_', '_', 'x', '_', '_', '_', '_'],
+            vec!['_', 'x', '_', '_', '_', '_', '_'],
+            vec!['o', '_', '_', '_', '_', '_', '_'],
+        ];
+        let board = Board::from(fields);
+        let actual = board.is_diagonal_win(4, 1, PLAYER_ONE);
         assert_eq!(actual, true);
     }
 }
