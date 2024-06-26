@@ -62,7 +62,7 @@ impl Board {
                         row[slot_index] = stone;
                         if self.is_horizontal_win(r, stone)
                             || self.is_vertical_win(slot_index, stone)
-                            || self.is_diagonal_win(slot_index, r, stone)
+                            || self.is_diagonal_win(r, slot_index, stone)
                         {
                             return Ok(Outcome::Win(stone));
                         }
@@ -118,7 +118,7 @@ impl Board {
 
         // falling top/left
         let (mut i, mut j) = (r, c);
-        while i >= 0 && j >= 0 {
+        while i > 0 && j > 0 {
             i -= 1;
             j -= 1;
             if self.fields[i][j] == p {
@@ -127,10 +127,11 @@ impl Board {
                 break;
             }
         }
+        println!("matches: {matches}");
 
         // falling bottom/right
         let (mut i, mut j) = (r, c);
-        while i < HEIGHT && j < WIDTH {
+        while i < HEIGHT-1 && j < WIDTH-1 {
             i += 1;
             j += 1;
             if self.fields[i][j] == p {
@@ -141,6 +142,7 @@ impl Board {
         }
 
         if matches >= CONNECT_N {
+            println!("matches: {matches}");
             return true;
         }
 
@@ -148,7 +150,7 @@ impl Board {
 
         // rising top/right
         let (mut i, mut j) = (r, c);
-        while i >= 0 && j < WIDTH {
+        while i > 0 && j < WIDTH-1 {
             i -= 1;
             j += 1;
             if self.fields[i][j] == p {
@@ -160,7 +162,7 @@ impl Board {
 
         // rising bottom/left
         let (mut i, mut j) = (r, c);
-        while i < HEIGHT && j >= 0 {
+        while i < HEIGHT-1 && j > 0 {
             i += 1;
             j -= 1;
             if self.fields[i][j] == p {
@@ -267,6 +269,21 @@ mod tests {
         ];
         let board = Board::from(fields);
         let actual = board.is_diagonal_win(4, 1, PLAYER_ONE);
+        assert_eq!(actual, true);
+    }
+
+    #[test]
+    fn test_diagonal_win_falling_left() {
+        let fields = vec![
+            vec!['_', '_', '_', '_', '_', '_', '_'],
+            vec!['_', '_', '_', '_', '_', '_', '_'],
+            vec!['x', '_', '_', '_', '_', '_', '_'],
+            vec!['o', 'x', '_', '_', '_', '_', '_'],
+            vec!['x', 'x', 'x', 'o', '_', '_', '_'],
+            vec!['o', 'o', 'o', 'x', '_', '_', '_'],
+        ];
+        let board = Board::from(fields);
+        let actual = board.is_diagonal_win(2, 0, PLAYER_ONE);
         assert_eq!(actual, true);
     }
 }

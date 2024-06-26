@@ -1,5 +1,18 @@
-- Startzeit:
+- Startzeit: 19:25
 - Getränke:
-    - ...
+    - 3 * Luzerner Bier Légère
 - Ereignisse und Erlebnisse:
-    - ...
+    - ~20:00 Uhr: Erleuchtung wegen "rückläufigen Ranges": Der Compiler kann dies nicht prüfen! (Loop wurde nicht betreten)
+        - man soll die Methode `rev()` von `Range` verwenden
+    - ~20:08 Uhr: erste Pinkelpause (leichter Schwindel beim Aufstehen)
+    - 20:14 Uhr: erstes Rülpsen
+    - 20:35 Uhr: ranges mit exklusiven Obergrenzen werden beim Pattern Matching nur experimentell unterstütz
+        - Die Compilermeldung wird mit Erstaunen und Entsetzen aufgenommen. Wut und Trauer machen sich breit.
+    - 20:47 Uhr: Das DDD beeinträchtigt die Disziplin beim TDD.
+    - ~20:50 Uhr: zweite Pinkelpause
+    - 20:54 Uhr: Nachschenken
+    - 20:57: zweites Rülpsen
+    - 21:19: drittes Rülpsen
+    - 21:30: Pinkelpause
+    - 21:49: Unit Tests works, Integration Test fails
+    - 21:51: alles funktioniert soweit
