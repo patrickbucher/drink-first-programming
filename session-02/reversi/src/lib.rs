@@ -26,6 +26,28 @@ impl Board {
         }
         Board { fields: rows }
     }
+
+    pub fn from(fields: &Vec<Vec<u8>>, (e, b, w): (u8, u8, u8)) -> Self {
+        let mut chars: Vec<Vec<char>> = Vec::new();
+        for i in 0..fields.len() {
+            let mut row: Vec<char> = Vec::new();
+            for j in 0..fields[i].len() {
+                let field = fields[i][j];
+                let chr: char = if field == e {
+                    EMPTY
+                } else if field == b {
+                    BLACK
+                } else if field == w {
+                    WHITE
+                } else {
+                    EMPTY
+                };
+                row.push(chr);
+            }
+            chars.push(row);
+        }
+        Board { fields: chars }
+    }
 }
 
 impl Display for Board {
@@ -69,5 +91,24 @@ mod tests {
                 }
             }
         }
+    }
+
+    #[test]
+    fn init_board_from() {
+        let fields = vec![
+            vec![0, 0, 0, 0, 0, 0, 0, 0],
+            vec![0, 0, 0, 0, 0, 0, 0, 0],
+            vec![0, 0, 0, 0, 0, 0, 0, 0],
+            vec![0, 0, 0, 2, 1, 0, 0, 0],
+            vec![0, 0, 0, 1, 2, 0, 0, 0],
+            vec![0, 0, 0, 0, 0, 0, 0, 0],
+            vec![0, 0, 0, 0, 0, 0, 0, 0],
+            vec![0, 0, 0, 0, 0, 0, 0, 0],
+        ];
+        let board = Board::from(&fields, (0, 1, 2));
+        assert_eq!(board.fields[3][3], WHITE);
+        assert_eq!(board.fields[4][4], WHITE);
+        assert_eq!(board.fields[3][4], BLACK);
+        assert_eq!(board.fields[4][3], BLACK);
     }
 }
