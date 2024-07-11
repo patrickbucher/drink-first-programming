@@ -1,8 +1,8 @@
 use std::fmt::{self, Display, Formatter};
 
 const EMPTY: char = '.';
-const BLACK: char = 'X';
-const WHITE: char = 'O';
+pub const BLACK: char = 'X';
+pub const WHITE: char = 'O';
 const SIDES: usize = 8;
 
 #[derive(Debug)]
@@ -88,6 +88,49 @@ impl Board {
             }
         }
         return false;
+    }
+
+    pub fn apply_move(&mut self, row: usize, col: usize, player: char) {
+        if !self.is_valid_move(row, col, player) {
+            panic!("invalid move {row} {col} {player}");
+        }
+        let directions: &[(isize, isize)] = &[
+            (-1, 0),
+            (-1, 1),
+            (0, 1),
+            (1, 1),
+            (1, 0),
+            (1, -1),
+            (0, -1),
+            (-1, -1),
+        ];
+        let opponent = match player {
+            BLACK => WHITE,
+            WHITE => BLACK,
+            _ => panic!("invalid player {player}"),
+        };
+        for (rd, cd) in directions {
+            let mut opponent_trail: Vec<(usize, usize)> = Vec::new();
+            let mut r = row as isize + rd;
+            let mut c = col as isize + cd;
+            let sides = SIDES as isize;
+            while r >= 0 && r < sides && c >= 0 && c < sides {
+                let field = self.fields[r as usize][c as usize];
+                if field == opponent {
+                    opponent_trail.push((r as usize, c as usize));
+                    r += rd;
+                    c += cd;
+                } else if field == player && !opponent_trail.is_empty() {
+                    self.fields[row][col] = player;
+                    for (tr, tc) in &opponent_trail {
+                        self.fields[*tr][*tc] = player;
+                    }
+                    break;
+                } else {
+                    break;
+                }
+            }
+        }
     }
 }
 
@@ -207,5 +250,63 @@ mod tests {
         let board = Board::from(&fields, (0, 1, 2));
         assert_eq!(board.is_valid_move(0, 0, BLACK), false);
         assert_eq!(board.is_valid_move(5, 4, BLACK), true);
+    }
+
+    #[test]
+    fn apply_first_move() {
+        let before = vec![
+            vec![0, 0, 0, 0, 0, 0, 0, 0],
+            vec![0, 0, 0, 0, 0, 0, 0, 0],
+            vec![0, 0, 0, 0, 0, 0, 0, 0],
+            vec![0, 0, 0, 2, 1, 0, 0, 0],
+            vec![0, 0, 0, 1, 2, 0, 0, 0],
+            vec![0, 0, 0, 0, 0, 0, 0, 0],
+            vec![0, 0, 0, 0, 0, 0, 0, 0],
+            vec![0, 0, 0, 0, 0, 0, 0, 0],
+        ];
+        let (row, col, player) = (2, 3, BLACK);
+        let after = vec![
+            vec![0, 0, 0, 0, 0, 0, 0, 0],
+            vec![0, 0, 0, 0, 0, 0, 0, 0],
+            vec![0, 0, 0, 1, 0, 0, 0, 0],
+            vec![0, 0, 0, 1, 1, 0, 0, 0],
+            vec![0, 0, 0, 1, 2, 0, 0, 0],
+            vec![0, 0, 0, 0, 0, 0, 0, 0],
+            vec![0, 0, 0, 0, 0, 0, 0, 0],
+            vec![0, 0, 0, 0, 0, 0, 0, 0],
+        ];
+        let mut board = Board::from(&before, (0, 1, 2));
+        board.apply_move(row, col, player);
+        let expected = Board::from(&after, (0, 1, 2));
+        assert_eq!(board.fields, expected.fields);
+    }
+
+    #[test]
+    fn apply_later_move() {
+        let before = vec![
+            vec![0, 0, 0, 0, 0, 0, 0, 0],
+            vec![0, 1, 1, 1, 1, 1, 1, 0],
+            vec![0, 1, 2, 2, 2, 2, 1, 0],
+            vec![0, 1, 2, 2, 2, 2, 1, 0],
+            vec![0, 1, 2, 0, 0, 2, 1, 0],
+            vec![0, 1, 2, 2, 2, 2, 1, 0],
+            vec![0, 1, 1, 1, 1, 1, 1, 0],
+            vec![0, 0, 0, 0, 0, 0, 0, 0],
+        ];
+        let (row, col, player) = (4, 3, BLACK);
+        let after = vec![
+            vec![0, 0, 0, 0, 0, 0, 0, 0],
+            vec![0, 1, 1, 1, 1, 1, 1, 0],
+            vec![0, 1, 2, 1, 2, 1, 1, 0],
+            vec![0, 1, 1, 1, 1, 2, 1, 0],
+            vec![0, 1, 1, 1, 0, 2, 1, 0],
+            vec![0, 1, 1, 1, 1, 2, 1, 0],
+            vec![0, 1, 1, 1, 1, 1, 1, 0],
+            vec![0, 0, 0, 0, 0, 0, 0, 0],
+        ];
+        let mut board = Board::from(&before, (0, 1, 2));
+        board.apply_move(row, col, player);
+        let expected = Board::from(&after, (0, 1, 2));
+        assert_eq!(board.fields, expected.fields);
     }
 }
