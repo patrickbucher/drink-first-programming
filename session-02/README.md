@@ -24,6 +24,8 @@ getestet werden. Das Spiel soll auf einem Gitter von acht (Breite) mal acht
     - 20:46 Uhr: Feststellung der offenen Punkte und starker Harndrang
     - 20:49 Uhr: Feedback des Bieres in Form eines Rülpsers
 
+![Das Nebenprodukt der zweiten Session](aftermath.jpeg)
+
 # Review
 
 TODO: am nächsten Tag durchführen
