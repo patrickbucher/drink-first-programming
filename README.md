@@ -56,3 +56,4 @@ gewichtet werden soll.
 ## Sessions
 
 - [Session 01](session-01/): [YouTube](https://www.youtube.com/playlist?list=PLux6j39XOCC7T_3h1MI86CkOc1qqrzxGR)
+- [Session 02](session-02/)
