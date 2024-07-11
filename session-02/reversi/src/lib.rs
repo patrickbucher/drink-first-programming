@@ -1,3 +1,5 @@
+use std::fmt::{self, Display, Formatter};
+
 const EMPTY: char = '.';
 const BLACK: char = 'X';
 const WHITE: char = 'O';
@@ -23,6 +25,27 @@ impl Board {
             rows.push(cols);
         }
         Board { fields: rows }
+    }
+}
+
+impl Display for Board {
+    fn fmt(&self, f: &mut Formatter) -> fmt::Result {
+        write!(f, "  ")?;
+        for i in 0..self.fields.len() {
+            let slot = (('a' as u8) + (i as u8)) as char;
+            write!(f, "{slot} ")?;
+        }
+        write!(f, "\n")?;
+        for i in 0..self.fields.len() {
+            let row = &self.fields[i];
+            write!(f, "{i} ")?;
+            for j in 0..row.len() {
+                let col = row[j];
+                write!(f, "{col} ")?;
+            }
+            write!(f, "\n")?;
+        }
+        Ok(())
     }
 }
 
