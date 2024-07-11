@@ -11,10 +11,11 @@ getestet werden. Das Spiel soll auf einem Gitter von acht (Breite) mal acht
 
 11.07.2024
 
-- Startzeit:
+- Startzeit: ca. 18:04 Uhr
 - Getränke:
     - n * Luzerner Bier Original
 - Ereignisse und Erlebnisse:
+    - 18:19 Uhr: Schluckauf
 
 # Review
 
