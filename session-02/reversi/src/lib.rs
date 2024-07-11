@@ -54,13 +54,13 @@ impl Display for Board {
     fn fmt(&self, f: &mut Formatter) -> fmt::Result {
         write!(f, "  ")?;
         for i in 0..self.fields.len() {
-            let slot = (('a' as u8) + (i as u8)) as char;
-            write!(f, "{slot} ")?;
+            write!(f, "{i} ")?;
         }
         write!(f, "\n")?;
         for i in 0..self.fields.len() {
             let row = &self.fields[i];
-            write!(f, "{i} ")?;
+            let r = (('a' as u8) + (i as u8)) as char;
+            write!(f, "{r} ")?;
             for j in 0..row.len() {
                 let col = row[j];
                 write!(f, "{col} ")?;
