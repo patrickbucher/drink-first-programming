@@ -191,4 +191,21 @@ mod tests {
         assert_eq!(board.is_valid_move(3, 2, BLACK), true);
         assert_eq!(board.is_valid_move(3, 2, WHITE), false);
     }
+
+    #[test]
+    fn validate_later_move() {
+        let fields = vec![
+            vec![0, 0, 0, 0, 0, 0, 0, 0],
+            vec![0, 2, 0, 0, 0, 0, 0, 0],
+            vec![0, 1, 2, 1, 1, 1, 0, 0],
+            vec![0, 0, 0, 2, 1, 0, 0, 0],
+            vec![0, 0, 0, 1, 2, 0, 0, 0],
+            vec![0, 0, 0, 0, 0, 0, 0, 0],
+            vec![0, 0, 0, 0, 0, 0, 0, 0],
+            vec![0, 0, 0, 0, 0, 0, 0, 0],
+        ];
+        let board = Board::from(&fields, (0, 1, 2));
+        assert_eq!(board.is_valid_move(0, 0, BLACK), false);
+        assert_eq!(board.is_valid_move(5, 4, BLACK), true);
+    }
 }
