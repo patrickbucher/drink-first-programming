@@ -48,6 +48,47 @@ impl Board {
         }
         Board { fields: chars }
     }
+
+    pub fn is_valid_move(&self, row: usize, col: usize, player: char) -> bool {
+        let field = self.fields[row][col];
+        if field != EMPTY {
+            return false;
+        }
+        let directions: &[(isize, isize)] = &[
+            (-1, 0),
+            (-1, 1),
+            (0, 1),
+            (1, 1),
+            (1, 0),
+            (1, -1),
+            (0, -1),
+            (-1, -1),
+        ];
+        let opponent = match player {
+            BLACK => WHITE,
+            WHITE => BLACK,
+            _ => return false,
+        };
+        for (rd, cd) in directions {
+            let mut has_visited_opponent = false;
+            let mut r = row as isize + rd;
+            let mut c = col as isize + cd;
+            let sides = SIDES as isize;
+            while r >= 0 && r < sides && c >= 0 && c < sides {
+                let field = self.fields[r as usize][c as usize];
+                if field == player && has_visited_opponent {
+                    return true;
+                } else if field == opponent {
+                    has_visited_opponent = true;
+                    r += rd;
+                    c += cd;
+                } else {
+                    break;
+                }
+            }
+        }
+        return false;
+    }
 }
 
 impl Display for Board {
@@ -110,5 +151,44 @@ mod tests {
         assert_eq!(board.fields[4][4], WHITE);
         assert_eq!(board.fields[3][4], BLACK);
         assert_eq!(board.fields[4][3], BLACK);
+    }
+
+    #[test]
+    fn validate_first_move() {
+        let fields = vec![
+            vec![0, 0, 0, 0, 0, 0, 0, 0],
+            vec![0, 0, 0, 0, 0, 0, 0, 0],
+            vec![0, 0, 0, 0, 0, 0, 0, 0],
+            vec![0, 0, 0, 2, 1, 0, 0, 0],
+            vec![0, 0, 0, 1, 2, 0, 0, 0],
+            vec![0, 0, 0, 0, 0, 0, 0, 0],
+            vec![0, 0, 0, 0, 0, 0, 0, 0],
+            vec![0, 0, 0, 0, 0, 0, 0, 0],
+        ];
+        let board = Board::from(&fields, (0, 1, 2));
+        assert_eq!(board.is_valid_move(0, 0, BLACK), false);
+        assert_eq!(board.is_valid_move(4, 4, BLACK), false);
+        assert_eq!(board.is_valid_move(2, 2, BLACK), false);
+        assert_eq!(board.is_valid_move(2, 3, BLACK), true);
+        assert_eq!(board.is_valid_move(2, 4, BLACK), false);
+        assert_eq!(board.is_valid_move(2, 4, WHITE), true);
+        assert_eq!(board.is_valid_move(2, 5, BLACK), false);
+        assert_eq!(board.is_valid_move(2, 5, WHITE), false);
+        assert_eq!(board.is_valid_move(3, 5, BLACK), false);
+        assert_eq!(board.is_valid_move(3, 5, WHITE), true);
+        assert_eq!(board.is_valid_move(4, 5, BLACK), true);
+        assert_eq!(board.is_valid_move(4, 5, WHITE), false);
+        assert_eq!(board.is_valid_move(5, 5, BLACK), false);
+        assert_eq!(board.is_valid_move(5, 5, WHITE), false);
+        assert_eq!(board.is_valid_move(5, 4, BLACK), true);
+        assert_eq!(board.is_valid_move(5, 4, WHITE), false);
+        assert_eq!(board.is_valid_move(5, 3, BLACK), false);
+        assert_eq!(board.is_valid_move(5, 3, WHITE), true);
+        assert_eq!(board.is_valid_move(5, 2, BLACK), false);
+        assert_eq!(board.is_valid_move(5, 2, WHITE), false);
+        assert_eq!(board.is_valid_move(4, 2, BLACK), false);
+        assert_eq!(board.is_valid_move(4, 2, WHITE), true);
+        assert_eq!(board.is_valid_move(3, 2, BLACK), true);
+        assert_eq!(board.is_valid_move(3, 2, WHITE), false);
     }
 }
