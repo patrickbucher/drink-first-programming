@@ -3,7 +3,7 @@ use std::fmt::{self, Display, Formatter};
 const EMPTY: char = '.';
 pub const BLACK: char = 'X';
 pub const WHITE: char = 'O';
-const SIDES: usize = 8;
+pub const SIDES: usize = 8;
 
 #[derive(Debug)]
 pub struct Board {
@@ -131,6 +131,21 @@ impl Board {
                 }
             }
         }
+    }
+
+    pub fn get_standings(&self) -> (usize, usize) {
+        let mut black = 0;
+        let mut white = 0;
+        for row in &self.fields {
+            for field in row {
+                match *field {
+                    BLACK => black += 1,
+                    WHITE => white += 1,
+                    _ => {}
+                }
+            }
+        }
+        (black, white)
     }
 }
 
@@ -308,5 +323,13 @@ mod tests {
         board.apply_move(row, col, player);
         let expected = Board::from(&after, (0, 1, 2));
         assert_eq!(board.fields, expected.fields);
+    }
+
+    #[test]
+    fn initial_standings() {
+        let board = Board::new();
+        let expected = (2, 2);
+        let actual = board.get_standings();
+        assert_eq!(expected, actual);
     }
 }
