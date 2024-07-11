@@ -13,9 +13,15 @@ getestet werden. Das Spiel soll auf einem Gitter von acht (Breite) mal acht
 
 - Startzeit: ca. 18:04 Uhr
 - Getränke:
-    - n * Luzerner Bier Original
+    - 6 * Luzerner Bier Original (1.98 l)
 - Ereignisse und Erlebnisse:
     - 18:19 Uhr: Schluckauf
+    - 19:45 Uhr: Toilettengang
+    - 19:51 Uhr: Feststellung erster Schwindelgefühle
+    - 19:57 Uhr: erste Maß geleert
+    - 20:00 Uhr: nachgeschenkt
+    - 20:30 Uhr: erste spielbare Version fertig
+    - 20:46 Uhr: Feststellung der offenen Punkte und starker Harndrang
 
 # Review
 
