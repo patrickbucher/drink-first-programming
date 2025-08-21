@@ -27,7 +27,7 @@ Rahmenbedingungen:
    Abfall der sprachlichen Fähigkeiten mitaufgezeichnet werden, andererseits
    kann die Verständlichkeit der Äusserungen mithilfe der automatischen
    Untertitelfunktion von YouTube objektiv beurteilt werden.
-3. Beim Programmieren sollen keine fortegschrittenen Hilfsmittel wie Language
+3. Beim Programmieren sollen keine fortgeschrittenen Hilfsmittel wie Language
    Server, KI-Assistenten oder mächtige Entwicklungsumgebungen zum Einsatz
    kommen, sondern nur der Texteditor Vim ohne jegliche Plugins. Zu
    Suchmaschinen soll nur im äussersten Notfall gegriffen werden, ansonsten
@@ -36,7 +36,7 @@ Rahmenbedingungen:
 4. Der Code soll im vorliegenden Repository festgehalten werden. Die beim
    Schreiben dieses Codes konsumierten Getränke und wahrgenommenen
    Geisteszustände werden in einem Protokoll ebenfalls in diesem Repository
-   dokumentiert.
+   festgehalten.
 5. Die Programmiersprache und das darin zu lösende Problem sind so auszuwählen,
    dass einerseits schon beide bekannt aber in dieser Kombination noch nie
    verwendet worden sind. Es handelt sich somit um eine Transferaufgabe, die
